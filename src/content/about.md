@@ -1,14 +1,12 @@
 ---
-title: About me
+title: 薇薇的日常分享
 ---
 
-### Hi, I'm Sara Richard 👋
+### 大家好，我是薇薇 👋
 
-I've been a photographer for over 10 years, focusing primarily on landscape and portrait photography. My journey began
-with a simple point-and-shoot camera while traveling through the mountains of Colorado, which sparked a passion that has
-taken me across the globe.
-My approach to photography centers on finding the extraordinary in ordinary moments. I believe that beauty exists
-everywhere – in urban streets, remote wilderness, and human connections. My goal is to capture these fleeting instances
-in a way that allows viewers to see the world through a different lens.
-When I'm not behind the camera, you can find me hiking in national parks, exploring new cities, or enjoying a cup of
-coffee at local cafés while planning my next photo adventure.
+这里是薇薇的日常小天地。
+我记录着创业路上的每一次尝试、每一次跌倒，也记录生活中那些平凡却闪光的时刻。无论是工作里的灵感笔记，还是日常的一杯咖啡、一段旅程，都是我生活的一部分。
+
+一路走来，我发现：创业不仅是打造事业，更是认识自己、学习成长的过程。每一次分享，都是一次心情的留痕，也希望能带给你一点启发或温暖。
+
+未来的路还长，我会继续在这里更新属于自己的故事，也期待能与你在这里相遇、交流，一起见证每一个小小的进步与惊喜。💛

@@ -8,19 +8,19 @@ export interface SocialLink {
 }
 
 export default {
-	title: 'SR',
+	title: '薇薇的日常',
 	favicon: 'favicon.ico',
-	owner: 'Sara Richard',
+	owner: '薇薇',
 	profileImage: 'profile.webp',
 	socialLinks: [
 		{
 			name: 'GitHub',
-			url: 'https://github.com/rockem/astro-photography-portfolio',
+			url: 'https://github.com/lx521603/astro-photography-portfolio',
 			icon: Github,
 		} as SocialLink,
 		{
 			name: 'Instagram',
-			url: 'https://www.instagram.com',
+			url: 'https://www.instagram.com/viviwang911',
 			icon: Instagram,
 		} as SocialLink,
 	],

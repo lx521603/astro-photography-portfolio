@@ -1,90 +1,64 @@
 collections:
-  - id: nature
-    name: Nature
   - id: travel
-    name: Travel
+    name: 旅行
   - id: street
-    name: Street
+    name: 街头
+  - id: work
+    name: 工作
 images:
-  - path: nature/nature-2.jpg
+  - path: work/vv.jpg
     meta:
-      title: Nature scene 2
-      description: Serene natural landscape capturing the essence of wilderness.
-      collections:
-        - nature
-    exif: {}
-  - path: nature/nature-3.jpg
-    meta:
-      title: Nature scene 3
-      description: Breathtaking natural vista showcasing environmental beauty.
-      collections:
-        - featured
-        - nature
-    exif: {}
-  - path: nature/nature-5.jpg
-    meta:
-      title: Nature scene 5
-      description: Natural landscape showing the raw beauty of the environment.
-      collections:
-        - nature
-    exif: {}
-  - path: nature/nature-7.jpg
-    meta:
-      title: Nature scene 7
-      description: Stunning natural landscape capturing environmental beauty.
-      collections:
-        - featured
-        - nature
-    exif: {}
-  - path: nature/nature-8.jpg
-    meta:
-      title: Nature scene 8
-      description: Beautiful natural vista showcasing environmental wonder.
-      collections:
-        - nature
-    exif: {}
-  - path: nature/L1002174.jpg
-    meta:
-      title: Travel scene 6
-      description: null
-      collections:
-        - featured
-        - nature
-    exif:
-      captureDate: 2025-03-27T10:35:21.000Z
-      fNumber: 8
-      focalLength: 28
-      iso: 100
-      model: LEICA Q3
-      shutterSpeed: 1250
-      lensModel: SUMMILUX 1:1.7/28 ASPH.
-  - path: nature/nature-10.jpg
-    meta:
-      title: Nature scene 10
-      description: Majestic natural landscape displaying environmental splendor.
-      collections:
-        - nature
-    exif: {}
-  - path: street/stree-1.jpg
-    meta:
-      title: Street photography 1
-      description: Urban scene capturing the essence of city life.
-      collections:
-        - featured
-        - street
-    exif: {}
-  - path: travel/travel-1.jpg
-    meta:
-      title: Travel scene 1
-      description: Journey through remarkable destinations.
-      collections:
-        - featured
-        - travel
-    exif: {}
-  - path: nature/nature-1.jpg
-    meta:
-      title: Nature 1
+      title: Vv
       description: ''
       collections:
-        - nature
-    exif: {}
+        - work
+    exif:
+      captureDate: 2025-06-27T00:04:14.000Z
+      fNumber: 1.4
+      focalLength: 35
+      iso: 100
+      model: ILCE-7CM2
+      shutterSpeed: 320
+      lensModel: DT 35mm F1.4 SAM
+  - path: work/vv1.jpg
+    meta:
+      title: Vv1
+      description: ''
+      collections:
+        - work
+    exif:
+      captureDate: 2025-06-27T00:04:18.000Z
+      fNumber: 1.4
+      focalLength: 35
+      iso: 100
+      model: ILCE-7CM2
+      shutterSpeed: 320
+      lensModel: DT 35mm F1.4 SAM
+  - path: street/DSC00730.jpg
+    meta:
+      title: Dsc00730
+      description: ''
+      collections:
+        - street
+    exif:
+      captureDate: 2025-10-10T18:47:11.000Z
+      fNumber: 1.4
+      focalLength: 35
+      iso: 1250
+      model: ILCE-7CM2
+      shutterSpeed: 200
+      lensModel: DT 35mm F1.4 SAM
+  - path: street/DSC00763.jpg
+    meta:
+      title: Dsc00763
+      description: ''
+      collections:
+        - street
+    exif:
+      captureDate: 2025-10-10T19:43:39.000Z
+      fNumber: 1.4
+      focalLength: 35
+      iso: 800
+      model: ILCE-7CM2
+      shutterSpeed: 320
+      lensModel: DT 35mm F1.4 SAM
