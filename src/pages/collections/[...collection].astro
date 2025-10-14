@@ -5,7 +5,7 @@ import { getCollections, getImages } from '../../data/imageStore';
 
 const allCollection = {
 	id: undefined,
-	name: 'All',
+	name: '所有照片',
 };
 const collections = [allCollection, ...(await getCollections())];
 const { collection } = Astro.params;

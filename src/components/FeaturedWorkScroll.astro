@@ -4,22 +4,22 @@ import { ChevronDown } from 'lucide-astro';
 
 <div
 	id="featured-gallery-scroll"
-	class="absolute bottom-10 left-0 right-0 flex justify-center transition-opacity duration-300"
+	class="absolute bottom-4 left-0 right-0 flex justify-center transition-opacity duration-300"
 >
 	<button
 		onclick="scrollToContent();"
 		class="flex flex-col items-center text-gray-600 hover:text-gray-900 transition-colors hover:cursor-pointer"
 		aria-label="Scroll down to see featured work"
 	>
-		<span class="text-sm mb-2">精选照片</span>
-		<ChevronDown size={24} />
+		<span class="text-xs mb-1">精选照片</span>
+		<ChevronDown size={20} />
 	</button>
 </div>
 
 <script is:inline>
 	const scrollToContent = () => {
 		window.scrollTo({
-			top: window.innerHeight,
+			top: window.innerHeight * 0.4, // 滚动到视口的40%位置
 			behavior: 'smooth',
 		});
 	};
@@ -28,7 +28,7 @@ import { ChevronDown } from 'lucide-astro';
 		const button = document.getElementById('featured-gallery-scroll');
 
 		window.addEventListener('scroll', () => {
-			if (window.scrollY > 100) {
+			if (window.scrollY > 50) { // 降低隐藏阈值
 				button.style.opacity = 0;
 				button.style.visibility = 'hidden';
 			} else {

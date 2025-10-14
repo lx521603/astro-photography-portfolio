@@ -12,6 +12,7 @@ images:
       description: ''
       collections:
         - work
+        - featured
     exif:
       captureDate: 2025-06-27T00:04:14.000Z
       fNumber: 1.4
@@ -40,6 +41,7 @@ images:
       description: ''
       collections:
         - street
+        - featured
     exif:
       captureDate: 2025-10-10T18:47:11.000Z
       fNumber: 1.4
@@ -54,6 +56,7 @@ images:
       description: ''
       collections:
         - street
+        - featured
     exif:
       captureDate: 2025-10-10T19:43:39.000Z
       fNumber: 1.4
@@ -62,3 +65,18 @@ images:
       model: ILCE-7CM2
       shutterSpeed: 320
       lensModel: DT 35mm F1.4 SAM
+  - path: work/Q30A5656.jpg
+    meta:
+      title: Q30a5656
+      description: ''
+      collections:
+        - work
+        - featured
+    exif:
+      captureDate: 2025-04-27T13:06:42.000Z
+      fNumber: 2.8
+      focalLength: 50
+      iso: 400
+      model: Canon EOS 5D Mark III
+      shutterSpeed: 125
+      lensModel: EF50mm f/1.2L USM
