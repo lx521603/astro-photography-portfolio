@@ -8,7 +8,7 @@ export interface SocialLink {
 }
 
 export default {
-	title: '薇薇的日常',
+	title: '索拉dot',
 	favicon: 'favicon.ico',
 	owner: '薇薇',
 	profileImage: 'profile.webp',
