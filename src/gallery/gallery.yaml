@@ -6,6 +6,13 @@ collections:
   - id: work
     name: 工作
 images:
+  - path: street/DSC01746.webp
+    meta:
+      title: ms
+      description: ''
+      collections:
+        - street
+        - featured
   - path: work/vv.jpg
     meta:
       title: Vv
