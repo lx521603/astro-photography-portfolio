@@ -1,4 +1,4 @@
-name: Deploy Astro Site to VPS
+name: Deploy Astro Site to aliyun
 
 permissions:
   contents: write
