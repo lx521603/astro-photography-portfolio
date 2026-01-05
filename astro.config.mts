@@ -1,17 +1,15 @@
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-
 export default defineConfig({
   site: 'https://sorayt.cn',
   base: '/',
-  // ✅ 添加这个简单的图片配置
-  image: {
-    service: {
-      entrypoint: 'astro/assets/services/sharp',
-    },
-    formats: ['webp', 'jpg', 'png'],
-  },
+  
+  // ❌ 完全禁用图片优化
+  // image: false,
+  
   vite: {
     plugins: [tailwindcss()],
+    // ✅ 配置静态资源处理
+    build: {
+      assetsInlineLimit: 0, // 不内联任何图片
+    },
   },
 });
