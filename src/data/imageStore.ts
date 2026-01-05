@@ -22,7 +22,7 @@ export class ImageStoreError extends Error {
  * Import all images from /src directory
  */
 const imageModules = import.meta.glob('/src/**/*.{jpg,jpeg,png,gif,webp}', {
-	eager: true,
+//	eager: true,
 });
 
 const defaultGalleryPath = 'src/gallery/gallery.yaml';
