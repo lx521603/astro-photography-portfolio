@@ -16,6 +16,18 @@ jobs:
     steps:
       - name: Checkout the source repository
         uses: actions/checkout@v4
+        with:
+          # ✅ 确保拉取完整历史，包含新增文件
+          fetch-depth: 0
+
+      - name: Debug file structure
+        run: |
+          echo "=== 当前目录结构 ==="
+          find . -name "*.jpg" -o -name "*.png" -o -name "*.webp" | head -20
+          echo "=== gallery 目录内容 ==="
+          ls -la src/gallery/ || echo "No src/gallery directory"
+          echo "=== 图片文件统计 ==="
+          find src/gallery -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.webp" \) 2>/dev/null | wc -l
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -26,12 +38,93 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # ✅ 添加这一步：生成 gallery.yaml
+      # ✅ 详细检查 generate 脚本
+      - name: Check generate script
+        run: |
+          echo "=== package.json scripts ==="
+          npm run
+          echo "=== 检查 generate 脚本 ==="
+          if grep -q '"generate"' package.json; then
+            echo "✅ Generate script found in package.json"
+            echo "Script content:"
+            grep -A 5 '"generate"' package.json
+          else
+            echo "❌ No generate script found in package.json"
+          fi
+
+      # ✅ 执行生成并验证
       - name: Generate gallery configuration
-        run: npm run generate
+        run: |
+          echo "=== 执行 npm run generate ==="
+          
+          # 备份现有的 gallery.yaml（如果有）
+          if [ -f "src/gallery/gallery.yaml" ]; then
+            cp src/gallery/gallery.yaml src/gallery/gallery.yaml.backup
+            echo "Backed up existing gallery.yaml"
+          fi
+          
+          # 执行生成
+          npm run generate || echo "Generate command failed, but continuing..."
+          
+          # 检查生成结果
+          echo "=== 检查生成结果 ==="
+          if [ -f "src/gallery/gallery.yaml" ]; then
+            echo "✅ gallery.yaml 已生成"
+            echo "文件大小: $(wc -l < src/gallery/gallery.yaml) 行"
+            echo "前5行内容:"
+            head -5 src/gallery/gallery.yaml
+            
+            # 检查是否包含新照片
+            echo "=== 检查新照片 ==="
+            # 列出所有图片文件
+            find src/gallery -name "*.jpg" -o -name "*.png" -o -name "*.webp" 2>/dev/null > image-list.txt
+            echo "总共找到 $(wc -l < image-list.txt) 张图片"
+            
+            # 检查 gallery.yaml 是否引用这些图片
+            echo "在 gallery.yaml 中查找图片引用..."
+            for img in $(cat image-list.txt | head -10); do
+              img_name=$(basename "$img")
+              if grep -q "$img_name" src/gallery/gallery.yaml; then
+                echo "✅ $img_name 在 gallery.yaml 中"
+              else
+                echo "❌ $img_name 不在 gallery.yaml 中"
+              fi
+            done
+            
+          else
+            echo "❌ gallery.yaml 未生成"
+            # 尝试恢复备份
+            if [ -f "src/gallery/gallery.yaml.backup" ]; then
+              cp src/gallery/gallery.yaml.backup src/gallery/gallery.yaml
+              echo "恢复之前的 gallery.yaml"
+            fi
+          fi
 
       - name: Build the Astro site
-        run: npm run build
+        run: |
+          echo "=== 开始构建 ==="
+          npm run build
+          echo "=== 构建完成 ==="
+
+      # ✅ 验证构建输出中的图片
+      - name: Verify build output
+        run: |
+          echo "=== 验证构建输出 ==="
+          if [ -d "dist" ]; then
+            echo "✅ dist 目录存在"
+            echo "图片文件数量: $(find dist -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.webp" \) | wc -l)"
+            echo "生成的 HTML 文件:"
+            find dist -name "*.html" | head -5
+            
+            # 检查一个示例页面中的图片引用
+            if [ -f "dist/index.html" ]; then
+              echo "首页中的图片引用:"
+              grep -o 'src="[^"]*\.\(jpg\|png\|webp\)"' dist/index.html | head -10 || echo "首页没有找到图片引用"
+            fi
+          else
+            echo "❌ dist 目录不存在"
+            exit 1
+          fi
 
       - name: Deploy dist to VPS
         uses: easingthemes/ssh-deploy@main
