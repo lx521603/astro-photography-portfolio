@@ -13,6 +13,27 @@ images:
       collections:
         - street
         - featured
+  - path: street/DSC01344.webp
+    meta:
+      title: sf
+      description: ''
+      collections:
+        - street
+        - featured
+  - path: street/DSC00961.webp
+    meta:
+      title: pts
+      description: ''
+      collections:
+        - street
+        - featured
+  - path: street/DSC01303.webp
+    meta:
+      title: kqh
+      description: ''
+      collections:
+        - street
+        - featured
   - path: work/vv.jpg
     meta:
       title: Vv
