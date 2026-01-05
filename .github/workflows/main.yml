@@ -36,7 +36,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       # ✅ 详细检查 generate 脚本
       - name: Check generate script
