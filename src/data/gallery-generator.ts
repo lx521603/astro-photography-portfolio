@@ -63,7 +63,7 @@ function getUpdatedCollectionList(targetGalleryObj: GalleryData, sourceGalleryOb
 }
 
 async function createGalleryObjFrom(galleryDir: string): Promise<GalleryData> {
-	const imageFiles = await fg(`${galleryDir}/**/*.{jpg,jpeg,png}`, {
+	const imageFiles = await fg(`${galleryDir}/**/*.{jpg,jpeg,png,webp}`, {
 		dot: false,
 	});
 	return {
