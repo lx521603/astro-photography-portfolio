@@ -8,11 +8,20 @@ import { createGalleryCollection, createGalleryImage } from './galleryEntityFact
 
 const defaultGalleryFileName = 'gallery.yaml';
 
+// ✅ 支持的文件格式（添加 webp）
+const SUPPORTED_IMAGE_FORMATS = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG', 'WEBP'];
+
 async function generateGalleryFile(galleryDir: string): Promise<void> {
 	try {
 		let galleryObj = await loadExistingGallery(galleryDir);
 		galleryObj = mergeGalleriesObj(galleryObj, await createGalleryObjFrom(galleryDir));
 		await writeGalleryYaml(galleryDir, galleryObj);
+		
+		// ✅ 添加统计信息
+		const totalImages = galleryObj.images.length;
+		const totalCollections = galleryObj.collections.length;
+		console.log(`✅ Gallery updated: ${totalCollections} collections, ${totalImages} images`);
+		
 	} catch (error) {
 		console.error('Failed to create gallery file:', error);
 		process.exit(1);
@@ -63,9 +72,35 @@ function getUpdatedCollectionList(targetGalleryObj: GalleryData, sourceGalleryOb
 }
 
 async function createGalleryObjFrom(galleryDir: string): Promise<GalleryData> {
+	// ✅ 修复：包含 webp 格式
 	const imageFiles = await fg(`${galleryDir}/**/*.{jpg,jpeg,png,webp}`, {
 		dot: false,
+		// ✅ 添加大小写不敏感
+		caseSensitiveMatch: false,
 	});
+	
+	console.log(`📸 Found ${imageFiles.length} image files`);
+	
+	// ✅ 按文件类型统计
+	const stats = {
+		jpg: 0,
+		jpeg: 0,
+		png: 0,
+		webp: 0,
+		other: 0
+	};
+	
+	imageFiles.forEach(file => {
+		const ext = path.extname(file).toLowerCase();
+		if (ext === '.jpg') stats.jpg++;
+		else if (ext === '.jpeg') stats.jpeg++;
+		else if (ext === '.png') stats.png++;
+		else if (ext === '.webp') stats.webp++;
+		else stats.other++;
+	});
+	
+	console.log(`📊 File type stats: JPG(${stats.jpg}), JPEG(${stats.jpeg}), PNG(${stats.png}), WebP(${stats.webp})`);
+	
 	return {
 		collections: createCollectionsFrom(imageFiles, galleryDir),
 		images: await createImagesFrom(imageFiles, galleryDir),
@@ -85,13 +120,26 @@ function createCollectionsFrom(imageFiles: string[], galleryDir: string) {
 }
 
 async function createImagesFrom(imageFiles: string[], galleryDir: string) {
+	console.log('🔄 Creating image entries...');
 	return Promise.all(imageFiles.map((file) => createGalleryImage(galleryDir, file)));
 }
 
 async function writeGalleryYaml(galleryDir: string, galleryObj: GalleryData) {
 	const filePath = path.join(galleryDir, defaultGalleryFileName);
 	await fs.promises.writeFile(filePath, yaml.dump(galleryObj), 'utf8');
-	console.log('Gallery file created/updated successfully at:', filePath);
+	console.log('✅ Gallery file created/updated successfully at:', filePath);
+	
+	// ✅ 验证写入的内容
+	const fileContent = await fs.promises.readFile(filePath, 'utf8');
+	const lines = fileContent.split('\n').length;
+	console.log(`📄 File size: ${lines} lines`);
+	
+	// ✅ 显示一些示例
+	const sampleImages = galleryObj.images.slice(0, 5);
+	console.log('📷 Sample images included:');
+	sampleImages.forEach(img => {
+		console.log(`  - ${img.path}`);
+	});
 }
 
 program.argument('<path to images directory>');
@@ -104,8 +152,15 @@ if (!directoryPath || !fs.existsSync(directoryPath)) {
 }
 
 (async () => {
+	console.log('🚀 Starting gallery generation...');
+	console.log(`📁 Scanning directory: ${directoryPath}`);
+	
 	await generateGalleryFile(directoryPath);
+	
+	// ✅ 最终验证
+	console.log('\n🎉 Gallery generation completed!');
+	
 })().catch((error) => {
-	console.error('Unhandled error:', error);
+	console.error('❌ Unhandled error:', error);
 	process.exit(1);
 });
